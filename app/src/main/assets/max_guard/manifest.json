@@ -1,0 +1,36 @@
+{
+  "manifest_version": 2,
+  "name": "MAX Private Gecko — AppTracer Guard",
+  "version": "0.3.1",
+  "description": "Blocks AppTracer HTTPS/HTTP requests from MAX Web",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "max-private-gecko-guard@drtrip.local"
+    }
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "nativeMessaging",
+    "geckoViewAddons",
+    "*://max.ru/*",
+    "*://*.max.ru/*",
+    "*://oneme.ru/*",
+    "*://*.oneme.ru/*",
+    "*://apptracer.ru/*",
+    "*://*.apptracer.ru/*",
+    "*://guard-selftest.invalid/*"
+  ],
+  "background": {
+    "scripts": [
+      "guard.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [{
+    "matches": ["https://web.max.ru/*"],
+    "js": ["proof.js"],
+    "run_at": "document_start",
+    "all_frames": false
+  }]
+}

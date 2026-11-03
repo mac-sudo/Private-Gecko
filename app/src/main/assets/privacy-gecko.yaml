@@ -1,0 +1,36 @@
+# Loaded only from this app's private files directory; no external debug config.
+# Calls, camera, microphone and location are intentionally unavailable in this shell.
+prefs:
+  media.peerconnection.enabled: false
+  media.navigator.enabled: false
+  geo.enabled: false
+  device.sensors.enabled: false
+  dom.battery.enabled: false
+  dom.gamepad.enabled: false
+  dom.vr.enabled: false
+  dom.vr.webxr.enabled: false
+  dom.vibrator.enabled: false
+  dom.netinfo.enabled: false
+  network.prefetch-next: false
+  network.dns.disablePrefetch: true
+  network.http.speculative-parallel-limit: 0
+  browser.send_pings: false
+  toolkit.telemetry.enabled: false
+  toolkit.telemetry.unified: false
+  datareporting.healthreport.uploadEnabled: false
+  datareporting.policy.dataSubmissionEnabled: false
+  # No passkeys/FIDO integration is needed for the QR-based MAX workflow.
+  security.webauth.webauthn: false
+
+  # Decode-only route verified in GeckoVideoProbe 1.4 on the test device.
+  # Keep content isolation and route decoding through FFmpeg/MediaCodec NDK in RDD.
+  # No sandbox disabling, remote debugging, verbose logs or encoder changes.
+  media.android-media-codec.enabled: false
+  media.android-media-codec.preferred: false
+  media.ffvpx-hw.enabled: true
+  media.rdd-ffvpx.enabled: true
+  media.rdd-process.enabled: true
+  media.rdd-opus.enabled: true
+  media.rdd-vorbis.enabled: true
+  media.rdd-vpx.enabled: true
+  media.rdd-wav.enabled: true

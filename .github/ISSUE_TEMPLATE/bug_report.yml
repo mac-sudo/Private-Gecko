@@ -1,0 +1,26 @@
+name: Ошибка
+description: Без переписки и личных данных
+body:
+  - type: markdown
+    attributes:
+      value: Не прикладывайте профиль, cookie, QR входа, переписку, ссылки с токенами или полный logcat. Уязвимости сообщайте через закрытый Security advisory.
+  - type: input
+    id: version
+    attributes:
+      label: Версия приложения
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Модель телефона и версия Android (без серийного номера)
+  - type: textarea
+    id: steps
+    attributes:
+      label: Шаги, ожидаемое и фактическое поведение
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Минимальный обезличенный фрагмент ошибки (необязательно)

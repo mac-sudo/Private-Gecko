@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Проверка защиты</title>
+<style>body{background:#12161c;color:#e5f3ee;font:16px system-ui;padding:24px}video{max-width:100%}pre{white-space:pre-wrap}</style>
+<h2>Проверка защиты перед открытием MAX</h2>
+<p>Проверяются только локальные возможности браузера и блокировка тестового адреса .invalid. Данные аккаунта не читаются.</p>
+<pre id="result">Проверка…</pre>
+<video id="video" muted playsinline></video>
+<script>
+(async () => {
+  const video = document.getElementById('video');
+  const bits = [
+    navigator.globalPrivacyControl === true,
+    typeof RTCPeerConnection === 'undefined',
+    typeof navigator.mediaDevices?.getUserMedia === 'undefined',
+    typeof navigator.geolocation === 'undefined',
+    typeof PublicKeyCredential === 'undefined',
+    !!video.canPlayType('video/mp4; codecs="avc1.64001F"')
+  ];
+  // Network blocking is tested separately by the isolated content script on the
+  // HTTPS origin; privileged resource:// requests are not a valid filter probe.
+  document.getElementById('result').textContent = ['GPC','WebRTC blocked','media capture hidden','geolocation hidden','WebAuthn hidden','H.264'].map((x,i)=>`${x}: ${bits[i]}`).join('\n');
+  document.title = 'MAX_PRIVACY_PROBE:' + bits.map(Number).join(':');
+  if (new URLSearchParams(location.search).get('media') !== '1') return;
+  // This route is enabled only in the separately identified verification build.
+  const played = [];
+  const detail = [];
+  for (const kind of ['mp4','webm']) {
+    let blobUrl;
+    try {
+      const response = await fetch(`flower.${kind}`);
+      if (!response.ok) throw Error('asset');
+      blobUrl = URL.createObjectURL(new Blob([await response.arrayBuffer()], {type:`video/${kind}`}));
+      const done = new Promise((resolve,reject) => {
+        video.onended = () => resolve(true);
+        video.onerror = () => reject(Error('media'));
+      });
+      video.src = blobUrl;
+      await Promise.race([video.play(),new Promise((_,reject)=>setTimeout(()=>reject(Error('play-timeout')),10000))]);
+      await Promise.race([done, new Promise((_,reject)=>setTimeout(()=>reject(Error('timeout')),15000))]);
+      played.push(true);
+      detail.push('OK');
+    } catch (error) { played.push(false); detail.push(['NotAllowedError','NotSupportedError','TypeError','Error'].includes(error.name) ? error.name : 'Other'); }
+    finally { video.pause(); video.removeAttribute('src'); video.load(); if(blobUrl)URL.revokeObjectURL(blobUrl); }
+  }
+  document.title = 'MAX_MEDIA_PROBE:' + played.map(Number).join(':') + ':' + detail.join(':');
+  document.getElementById('result').textContent += '\nMedia MP4/WebM: '+played.join('/');
+})();
+</script></html>

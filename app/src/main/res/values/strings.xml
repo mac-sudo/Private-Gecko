@@ -1,0 +1,30 @@
+<resources>
+    <string name="settings_title">Настройки</string>
+    <string name="settings_version">Настройки · %1$s</string>
+    <string name="lock_setting">Блокировка при открытии</string>
+    <string name="lock_hint">Отпечаток или код устройства при запуске и после минуты вне приложения. Можно отключить; вход в MAX сохранится.</string>
+    <string name="lock_unavailable">Сначала настройте блокировку экрана Android. Приложение не хранит отпечаток или код.</string>
+    <string name="clean_setting">Удалять метаданные обычных фото</string>
+    <string name="clean_hint">Отправляется новая копия JPEG, PNG или статичного WebP без обычных EXIF/GPS, до 16 Мп. Оригиналы не меняются. Видео и документы могут содержать метаданные.</string>
+    <string name="notifications_settings">Уведомления Android</string>
+    <string name="privacy_report">Проверка защит</string>
+    <string name="privacy_policy">Приватность и ограничения</string>
+    <string name="licenses">Лицензии и исходный код</string>
+    <string name="gecko_licenses">Лицензии компонентов Gecko</string>
+    <string name="updates">Обновления и версия</string>
+    <string name="close">Закрыть</string>
+    <string name="settings_unavailable">Настройки Android недоступны</string>
+    <string name="document_unavailable">Документ недоступен</string>
+    <string name="protection_unavailable">Не удалось включить защиту — MAX не загружен</string>
+    <string name="filter_connecting">MAX Web · подключение сетевого фильтра…</string>
+    <string name="filter_unavailable">Сетевой фильтр недоступен — MAX не загружен</string>
+    <string name="initial_status">MAX Web · мобильный · защита от трекеров</string>
+    <string name="version_label">v%1$s</string>
+    <string name="clipboard_notice">Копирование отчёта выполняется только по нажатию. Системный буфер обмена может быть доступен другим приложениям.</string>
+    <string name="origin_status">MAX · %1$s · %2$s</string>
+    <string name="protection_passed">проверка защиты пройдена</string>
+    <string name="protection_unverified">защита не проверена</string>
+    <string name="verification_status">Защиты=%1$s; H264=%2$s; MP4/WebM=%3$s; %4$s; фото=%5$s; очистка=%6$s</string>
+    <string name="protection_failed">Защиты не прошли проверку — MAX закрыт</string>
+    <string name="protection_timeout">Не удалось проверить защиты — MAX не загружен</string>
+</resources>
